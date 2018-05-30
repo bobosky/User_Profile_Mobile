@@ -16,7 +16,7 @@
         <div id="search" style="height: 10%;">
             <form action="/display" method="get">
                 {% csrf_token %}
-                用户ID: <input type="text" name="id">
+                用户ID: <input type="text" name="id" value="{{ user_name|safe }}">
                 <input type="submit" value="查看">
             </form>
         </div>
@@ -25,6 +25,7 @@
             <div id="work"></div>
             <div id="ent1"></div>
             <div id="ent2"></div>
+            <div id="income_level"></div>
             <div id="ent_way"></div>
             <div id="work_prefer"></div>
             <div id="trip_distance"></div>
@@ -137,6 +138,10 @@
     if("name" in ent2){
         var ent2_txt = "<p>活动地: "+ent2["name"]+ "</p>";
         $("#ent2").append(ent2_txt)
+    }
+    var income_level = "{{ income_level|safe }}";
+    if(income_level != "default"){
+        $("#income_level").append("<p>收入水平："+income_level+"</p>")
     }
     var ent_way = "{{ ent_way|safe }}";
     if(ent_way != "default"){
